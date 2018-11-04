@@ -37,6 +37,7 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Profiles" />
     <Folder Include="RESTfulServiceContent" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +51,9 @@
       <RoleType>Web</RoleType>
       <RoleName>RESTfulService</RoleName>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\cinetecrestserviceProduction.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
