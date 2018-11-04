@@ -221,6 +221,7 @@
     <Compile Include="Controllers\ActorController.cs" />
     <Compile Include="Controllers\DirectorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,6 +229,7 @@
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\Director.cs" />
+    <Compile Include="Models\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebRole.cs" />
   </ItemGroup>
@@ -288,7 +290,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Actor\" />
+    <Folder Include="Views\Clasificacion\" />
     <Folder Include="Views\Director\" />
+    <Folder Include="Views\Rating\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
