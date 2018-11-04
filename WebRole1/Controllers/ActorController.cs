@@ -92,9 +92,9 @@ namespace WebRole1.Controllers
                 return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
 
             }
-            catch //Si ocurrio algun error se retorna un Json indicandolo
+            catch (Exception e)//Si ocurrio algun error se retorna un Json indicandolo
             {
-                return Json(new { data = "error" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -160,12 +160,12 @@ namespace WebRole1.Controllers
                 //En caso de que ocurriera un error
                 else
                 {
-                    return Json(new { data = "error" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { error = "error" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            catch
+            catch (Exception e)
             {
-                return Json(new { data = "error" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -237,12 +237,12 @@ namespace WebRole1.Controllers
                 //En caso de que ocurriera un error
                 else
                 {
-                    return Json(new { data = "error" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { error = "error" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            catch
+            catch (Exception e)
             {
-                return Json(new { data = "error" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -285,9 +285,9 @@ namespace WebRole1.Controllers
                 return Json(new { data = "success" }, JsonRequestBehavior.AllowGet);
 
             }
-            catch //Caso en que ocurrio un error durante el proceso
+            catch (Exception e) //Caso en que ocurrio un error durante el proceso
             {
-                return Json(new { data = "error" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
     }
