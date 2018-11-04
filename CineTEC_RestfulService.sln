@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "CineTEC_RestfulService", "CineTEC_RestfulService\CineTEC_RestfulService.ccproj", "{AAF33BAE-AB60-4B50-B7D3-C4B28FCCF34A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTfulService", "WebRole1\RESTfulService.csproj", "{4E89CABF-92A0-429B-BE5F-5F74B727213B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAF33BAE-AB60-4B50-B7D3-C4B28FCCF34A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF33BAE-AB60-4B50-B7D3-C4B28FCCF34A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF33BAE-AB60-4B50-B7D3-C4B28FCCF34A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAF33BAE-AB60-4B50-B7D3-C4B28FCCF34A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E89CABF-92A0-429B-BE5F-5F74B727213B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E89CABF-92A0-429B-BE5F-5F74B727213B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E89CABF-92A0-429B-BE5F-5F74B727213B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E89CABF-92A0-429B-BE5F-5F74B727213B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44EB1023-E3A2-4578-B6A6-E77E31ED6A2B}
+	EndGlobalSection
+EndGlobal
