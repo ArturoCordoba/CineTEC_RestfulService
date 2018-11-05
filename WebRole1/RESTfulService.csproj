@@ -223,6 +223,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\RatingController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\TheaterController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -233,6 +234,7 @@
     <Compile Include="Models\Director.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Rating.cs" />
+    <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Theater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebRole.cs" />
@@ -295,9 +297,11 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Actor\" />
     <Folder Include="Views\Clasificacion\" />
+    <Folder Include="Views\Connection\" />
     <Folder Include="Views\Director\" />
     <Folder Include="Views\Movie\" />
     <Folder Include="Views\Rating\" />
+    <Folder Include="Views\Room\" />
     <Folder Include="Views\Theater\" />
   </ItemGroup>
   <ItemGroup>
