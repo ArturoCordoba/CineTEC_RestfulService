@@ -221,6 +221,7 @@
     <Compile Include="Controllers\ActorController.cs" />
     <Compile Include="Controllers\DirectorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\TheaterController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\Director.cs" />
+    <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Theater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -294,6 +296,7 @@
     <Folder Include="Views\Actor\" />
     <Folder Include="Views\Clasificacion\" />
     <Folder Include="Views\Director\" />
+    <Folder Include="Views\Movie\" />
     <Folder Include="Views\Rating\" />
     <Folder Include="Views\Theater\" />
   </ItemGroup>
