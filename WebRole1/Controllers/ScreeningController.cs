@@ -129,7 +129,7 @@ namespace WebRole1.Controllers
                 //Se declara el parametro correspondiente a Schedule
                 var paramSchedule = command.CreateParameter();
                 paramSchedule.ParameterName = "Schedule";
-                paramSchedule.Value = screening.Schedule;
+                paramSchedule.Value = DateTime.Parse(screening.Schedule);
                 command.Parameters.Add(paramSchedule);
 
                 //Se declara el parametro correspondiente a Id_room
