@@ -36,7 +36,7 @@ namespace WebRole1.Controllers
             connection.Close();
 
             //Se crea una variable con los objetos recuperados
-            var data = dataSet.Tables[0].AsEnumerable().Select(x => new Bill
+            var data = dataSet.Tables[0].AsEnumerable().Select(x => new Bill_info
             {
                 Id_bill = x.Field<int>("Id_bill"),
                 Datetime = x.Field<DateTime>("Datetime").ToString(),
@@ -83,7 +83,7 @@ namespace WebRole1.Controllers
                 connection.Close();
 
                 //Se crea una variable con los objetos recuperados
-                var data = dataSet.Tables[0].AsEnumerable().Select(x => new Bill
+                var data = dataSet.Tables[0].AsEnumerable().Select(x => new Bill_info
                 {
                     Id_bill = x.Field<int>("Id_bill"),
                     Datetime = x.Field<DateTime>("Datetime").ToString(),

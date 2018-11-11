@@ -223,6 +223,7 @@
     <Compile Include="Controllers\DirectorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\ScreeningController.cs" />
@@ -234,12 +235,15 @@
     </Compile>
     <Compile Include="Models\Actor.cs" />
     <Compile Include="Models\Bill.cs" />
+    <Compile Include="Models\Bill_info.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\Director.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Screening.cs" />
+    <Compile Include="Models\Seat.cs" />
     <Compile Include="Models\Theater.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -307,6 +311,7 @@
     <Folder Include="Views\Connection\" />
     <Folder Include="Views\Director\" />
     <Folder Include="Views\Movie\" />
+    <Folder Include="Views\Purchase\" />
     <Folder Include="Views\Rating\" />
     <Folder Include="Views\Room\" />
     <Folder Include="Views\Screening\" />

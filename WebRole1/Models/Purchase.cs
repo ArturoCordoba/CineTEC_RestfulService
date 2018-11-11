@@ -5,10 +5,14 @@ using System.Web;
 
 namespace WebRole1.Models
 {
-    public class Bill
+    public class Purchase
     {
-        public int Id_bill { get; set; }
+        public int Id_client { get; set; }
+
+        public int Id_screening { get; set; }
 
         public string Datetime { get; set; }
+
+        public List<Seat> Seats { get; set; }
     }
 }
