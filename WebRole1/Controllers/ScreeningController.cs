@@ -287,5 +287,50 @@ namespace WebRole1.Controllers
                 return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
+
+
+        [HttpGet]
+        public ActionResult GetByTheater(int id)
+        {
+            try
+            {
+                //Se abre la conexion entre C# y la base de datos
+                NpgsqlConnection connection = new NpgsqlConnection(Connection.connectionString);
+                connection.Open();
+
+                //Se declara el comando SQL a ejecutar
+                string sqlQuery = "SELECT * FROM SCREENINGS_THEATER WHERE Id_theater = " + id.ToString();
+
+                //Se ejecuta el comando
+                NpgsqlDataAdapter sqlData = new NpgsqlDataAdapter(sqlQuery, connection);
+
+                //Se almacena la respuesta
+                DataSet dataSet = new DataSet();
+                sqlData.Fill(dataSet);
+
+                //Se cierra la conexion
+                connection.Close();
+
+                //Se crea una variable con los objetos recuperados
+                var data = dataSet.Tables[0].AsEnumerable().Select(x => new Screenings_theater
+                {
+                    Id_screening = x.Field<int>("Id_screening"),
+                    Schedule = x.Field<DateTime>("Schedule").ToString(),
+                    Id_movie = x.Field<int>("Id_movie"),
+                    M_name = x.Field<string>("M_name"),
+                    Id_room = x.Field<int>("Id_room"),
+                    R_name = x.Field<string>("R_name"),
+                    Id_theater = x.Field<int>("Id_theater"),
+                    T_name = x.Field<string>("T_name")
+                });
+
+                //Se transforma la informacion obtenida a formato Json
+                return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception e)
+            {
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+        } 
     }
 }

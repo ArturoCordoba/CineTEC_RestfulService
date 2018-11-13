@@ -245,6 +245,7 @@
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Screening.cs" />
+    <Compile Include="Models\Screenings_theater.cs" />
     <Compile Include="Models\Seat.cs" />
     <Compile Include="Models\Theater.cs" />
     <Compile Include="Models\Ticket.cs" />
