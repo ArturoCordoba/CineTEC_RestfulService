@@ -288,7 +288,13 @@ namespace WebRole1.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Metodo para obtener todas las proyecciones de un cine
+        /// </summary>
+        /// <param name="id">Identificador de cine</param>
+        /// <returns>
+        /// Json con la respuesta enviada por la base de datos
+        /// </returns>
         [HttpGet]
         public ActionResult GetByTheater(int id)
         {
@@ -331,6 +337,55 @@ namespace WebRole1.Controllers
             {
                 return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
             }
-        } 
+        }
+
+        /// <summary>
+        /// Metodo para obtener los asientos vendidos de una proyeccion
+        /// </summary>
+        /// <param name="id">Identificador de la proyeccion</param>
+        /// <returns>
+        /// Json con la respuesta enviada por el servidor
+        /// </returns>
+        [HttpGet]
+        public ActionResult GetSeatsSold(int id)
+        {
+            try
+            {
+                //Se abre la conexion entre C# y la base de datos
+                NpgsqlConnection connection = new NpgsqlConnection(Connection.connectionString);
+                connection.Open();
+
+                //Se declara el comando SQL a ejecutar
+                string sqlQuery = "SELECT * FROM SEATS_SCREENING WHERE Id_screening = " + id.ToString();
+
+                //Se ejecuta el comando
+                NpgsqlDataAdapter sqlData = new NpgsqlDataAdapter(sqlQuery, connection);
+
+                //Se almacena la respuesta
+                DataSet dataSet = new DataSet();
+                sqlData.Fill(dataSet);
+
+                //Se cierra la conexion
+                connection.Close();
+
+                //Se crea una variable con los objetos recuperados
+                var data = dataSet.Tables[0].AsEnumerable().Select(x => new Seats_screening
+                {
+                    Id_screening = x.Field<int>("Id_screening"),
+                    Number_row = x.Field<string>("Number_row"),
+                    Number_column = x.Field<int>("Number_column"),
+                    M_name = x.Field<string>("M_name"),
+                    R_name = x.Field<string>("R_name")
+                });
+
+                //Se transforma la informacion obtenida a formato Json
+                return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }

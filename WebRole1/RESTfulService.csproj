@@ -247,6 +247,7 @@
     <Compile Include="Models\Screening.cs" />
     <Compile Include="Models\Screenings_theater.cs" />
     <Compile Include="Models\Seat.cs" />
+    <Compile Include="Models\Seats_screening.cs" />
     <Compile Include="Models\Theater.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
