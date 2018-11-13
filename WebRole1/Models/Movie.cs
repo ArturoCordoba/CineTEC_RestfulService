@@ -15,6 +15,8 @@ namespace WebRole1.Models
 
         public string I_name { get; set; }
 
+        public int Number_copies { get; set; }
+
         public int Duration { get; set; }
 
         public int Id_rating { get; set; }

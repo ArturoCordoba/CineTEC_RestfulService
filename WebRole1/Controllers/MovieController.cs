@@ -43,6 +43,7 @@ namespace WebRole1.Controllers
                 O_name = x.Field<string>("O_name"),
                 M_name = x.Field<string>("M_name"),
                 I_name = x.Field<string>("I_name"),
+                Number_copies = x.Field<int>("Number_copies"),
                 Duration = x.Field<int>("Duration"),
                 Id_rating = x.Field<int>("Id_rating")
             });
@@ -88,6 +89,7 @@ namespace WebRole1.Controllers
                     O_name = x.Field<string>("O_name"),
                     M_name = x.Field<string>("M_name"),
                     I_name = x.Field<string>("I_name"),
+                    Number_copies = x.Field<int>("Number_copies"),
                     Duration = x.Field<int>("Duration"),
                     Id_rating = x.Field<int>("Id_rating")
                 });
@@ -119,7 +121,7 @@ namespace WebRole1.Controllers
                 connection.Open();
 
                 //Se declara el comando SQL a ejecutar
-                string sqlQuery = "INSERT INTO MOVIE (O_name, M_name, I_name, Duration, Id_rating) VALUES(@O_name, @M_name, @I_name, @Duration, @Id_rating)";
+                string sqlQuery = "INSERT INTO MOVIE (O_name, M_name, I_name, Number_copies, Duration, Id_rating) VALUES(@O_name, @M_name, @I_name, @Number_copies, @Duration, @Id_rating)";
 
                 //Se crea el objeto a cargo de realizar la consulta
                 IDbCommand command = connection.CreateCommand();
@@ -142,6 +144,12 @@ namespace WebRole1.Controllers
                 paramIname.ParameterName = "I_name";
                 paramIname.Value = movie.I_name;
                 command.Parameters.Add(paramIname);
+
+                //Se declara el parametro correspondiente a Number_copies
+                var paramNumCopies = command.CreateParameter();
+                paramNumCopies.ParameterName = "Number_copies";
+                paramNumCopies.Value = movie.Number_copies;
+                command.Parameters.Add(paramNumCopies);
 
                 //Se declara el parametro correspondiente a Duration
                 var paramDuration = command.CreateParameter();
@@ -195,7 +203,7 @@ namespace WebRole1.Controllers
                 connection.Open();
 
                 //Se declara el comando SQL a ejecutar
-                string sqlQuery = "UPDATE MOVIE SET O_name = @O_name, M_name = @M_name, I_name = @I_name, Duration = @Duration, Id_rating = @Id_rating WHERE Id_movie = @Id_movie";
+                string sqlQuery = "UPDATE MOVIE SET O_name = @O_name, M_name = @M_name, I_name = @I_name, Number_copies = @Number_copies, Duration = @Duration, Id_rating = @Id_rating WHERE Id_movie = @Id_movie";
 
                 //Se crea el objeto a cargo de realizar la consulta
                 IDbCommand command = connection.CreateCommand();
@@ -224,6 +232,12 @@ namespace WebRole1.Controllers
                 paramIname.ParameterName = "I_name";
                 paramIname.Value = movie.I_name;
                 command.Parameters.Add(paramIname);
+
+                //Se declara el parametro correspondiente a Number_copies
+                var paramNumCopies = command.CreateParameter();
+                paramNumCopies.ParameterName = "Number_copies";
+                paramNumCopies.Value = movie.Number_copies;
+                command.Parameters.Add(paramNumCopies);
 
                 //Se declara el parametro correspondiente a Duration
                 var paramDuration = command.CreateParameter();
