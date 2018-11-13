@@ -39,11 +39,11 @@ namespace WebRole1.Controllers
             var data = dataSet.Tables[0].AsEnumerable().Select(x => new Bill_info
             {
                 Id_bill = x.Field<int>("Id_bill"),
-                Datetime = x.Field<DateTime>("Datetime").ToString(),
+                Datetime = x.Field<DateTime>("Datetime").ToString("dd-MM-yyyy HH:mm:ss"),
                 T_name = x.Field<string>("T_name"),
                 M_name = x.Field<string>("M_name"),
                 R_name = x.Field<string>("R_name"),
-                Schedule = x.Field<DateTime>("Schedule").ToString(),
+                Schedule = x.Field<DateTime>("Schedule").ToString("dd-MM-yyyy HH:mm:ss"),
                 Id_client = x.Field<string>("Id_client"),
                 Total = x.Field<decimal>("Total")
             });
@@ -86,11 +86,11 @@ namespace WebRole1.Controllers
                 var data = dataSet.Tables[0].AsEnumerable().Select(x => new Bill_info
                 {
                     Id_bill = x.Field<int>("Id_bill"),
-                    Datetime = x.Field<DateTime>("Datetime").ToString(),
+                    Datetime = x.Field<DateTime>("Datetime").ToString("dd-MM-yyyy HH:mm:ss"),
                     T_name = x.Field<string>("T_name"),
                     M_name = x.Field<string>("M_name"),
                     R_name = x.Field<string>("R_name"),
-                    Schedule = x.Field<DateTime>("Schedule").ToString(),
+                    Schedule = x.Field<DateTime>("Schedule").ToString("dd-MM-yyyy HH:mm:ss"),
                     Id_client = x.Field<string>("Id_client"),
                     Total = x.Field<decimal>("Total")
                 });
