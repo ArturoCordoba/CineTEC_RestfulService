@@ -150,10 +150,10 @@ namespace WebRole1.Controllers
                 command.Parameters.Add(paramDuration);
 
                 //Se declara el parametro correspondiente a Id_rating
-                var paramIdRating = command.CreateParameter();
-                paramIdRating.ParameterName = "Id_rating";
-                paramIdRating.Value = movie.Id_rating;
-                command.Parameters.Add(paramIdRating);
+                var paramIdActorRating = command.CreateParameter();
+                paramIdActorRating.ParameterName = "Id_rating";
+                paramIdActorRating.Value = movie.Id_rating;
+                command.Parameters.Add(paramIdActorRating);
 
                 //Se ejecuta el comando, se almacena el resultado en una variable
                 int result = command.ExecuteNonQuery();
@@ -202,10 +202,10 @@ namespace WebRole1.Controllers
                 command.CommandText = sqlQuery;
 
                 //Se declara el parametro correspondiente a Id_movie
-                var paramId = command.CreateParameter();
-                paramId.ParameterName = "Id_movie";
-                paramId.Value = movie.Id_movie;
-                command.Parameters.Add(paramId);
+                var paramIdActor = command.CreateParameter();
+                paramIdActor.ParameterName = "Id_movie";
+                paramIdActor.Value = movie.Id_movie;
+                command.Parameters.Add(paramIdActor);
 
                 //Se declara el parametro correspondiente a O_name
                 var paramOname = command.CreateParameter();
@@ -232,10 +232,10 @@ namespace WebRole1.Controllers
                 command.Parameters.Add(paramDuration);
 
                 //Se declara el parametro correspondiente a Id_rating
-                var paramIdRating = command.CreateParameter();
-                paramIdRating.ParameterName = "Id_rating";
-                paramIdRating.Value = movie.Id_rating;
-                command.Parameters.Add(paramIdRating);
+                var paramIdActorRating = command.CreateParameter();
+                paramIdActorRating.ParameterName = "Id_rating";
+                paramIdActorRating.Value = movie.Id_rating;
+                command.Parameters.Add(paramIdActorRating);
 
                 //Se ejecuta el comando, se almacena el resultado en una variable
                 int result = command.ExecuteNonQuery();
@@ -284,10 +284,310 @@ namespace WebRole1.Controllers
                 command.CommandText = sqlQuery;
 
                 //Se declara el parametro correspondiente a Id_movie
-                var paramId = command.CreateParameter();
-                paramId.ParameterName = "Id_movie";
-                paramId.Value = id;
-                command.Parameters.Add(paramId);
+                var paramIdActor = command.CreateParameter();
+                paramIdActor.ParameterName = "Id_movie";
+                paramIdActor.Value = id;
+                command.Parameters.Add(paramIdActor);
+
+                //Se ejecuta el comando, se almacena el resultado en una variable
+                int result = command.ExecuteNonQuery();
+
+                //Se cierra la conexion
+                connection.Close();
+
+                //Se retorna un Json indicando que la operacion fue exitosa
+                return Json(new { data = "success" }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e) //Caso en que ocurrio un error durante el proceso
+            {
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para obtener todos los actores de una pelicula
+        /// </summary>
+        /// <param name="id">Identificador de la pelicula</param>
+        /// <returns>
+        /// Json con la respuesta enviada por el servidor
+        /// </returns>
+        [HttpGet]
+        public ActionResult getActors(int id)
+        {
+            try
+            {
+                //Se abre la conexion entre C# y la base de datos
+                NpgsqlConnection connection = new NpgsqlConnection(Connection.connectionString);
+                connection.Open();
+
+                //Se declara la consulta SQL a ejecutar
+                string sqlQuery = "SELECT * FROM ACTOR_BY_MOVIE JOIN ACTOR ON ACTOR.Id_actor = ACTOR_BY_MOVIE.Id_actor WHERE Id_movie = " + id.ToString();
+
+                //Se ejecuta la consulta
+                NpgsqlDataAdapter sqlData = new NpgsqlDataAdapter(sqlQuery, connection);
+
+                //Se almacena la respuesta
+                DataSet dataSet = new DataSet();
+                sqlData.Fill(dataSet);
+
+                //Se cierra la conexion
+                connection.Close();
+
+                //Se crea una variable con los objetos recuperados
+                var data = dataSet.Tables[0].AsEnumerable().Select(x => new Actor
+                {
+                    Id_actor = x.Field<int>("Id_actor"),
+                    F_name = x.Field<string>("F_name"),
+                    FL_name = x.Field<string>("FL_name"),
+                    SL_name = x.Field<string>("SL_name")
+                });
+
+                //Se transforma la informacion obtenida a formato Json
+                return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e)//Si ocurrio algun error se retorna un Json indicandolo
+            {
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para añadir un nuevo actor a una pelicula
+        /// </summary>
+        /// <param name="actor">Objeto que almacena el id del actor y el de la pelicula</param>
+        /// <returns>
+        /// Json indicando el resultado de la operacion
+        /// </returns>
+        [HttpPost]
+        public ActionResult addActor(Actor_by_movie actor)
+        {
+            try
+            {
+                //Se abre la conexion entre C# y la base de datos
+                NpgsqlConnection connection = new NpgsqlConnection(Connection.connectionString);
+                connection.Open();
+
+                //Se declara el comando SQL a ejecutar
+                string sqlQuery = "INSERT INTO ACTOR_BY_MOVIE (Id_actor, Id_movie) VALUES (@Id_actor, @Id_movie)";
+
+                //Se crea el objeto a cargo de realizar la consulta
+                IDbCommand command = connection.CreateCommand();
+                command.CommandText = sqlQuery;
+
+                //Se declara el parametro correspondiente a Id_actor
+                var paramIdActor = command.CreateParameter();
+                paramIdActor.ParameterName = "Id_actor";
+                paramIdActor.Value = actor.Id_actor;
+                command.Parameters.Add(paramIdActor);
+
+                //Se declara el parametro correspondiente a Id_movie
+                var paramIdMovie = command.CreateParameter();
+                paramIdMovie.ParameterName = "Id_movie";
+                paramIdMovie.Value = actor.Id_movie;
+                command.Parameters.Add(paramIdMovie);
+
+                //Se ejecuta el comando, se almacena el resultado en una variable
+                int result = command.ExecuteNonQuery();
+
+                //Se cierra la conexion
+                connection.Close();
+
+                //Se retorna un Json indicando que la operacion fue exitosa
+                return Json(new { data = "success" }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e) //Caso en que ocurrio un error durante el proceso
+            {
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para eliminar un actor de una pelicula
+        /// </summary>
+        /// <param name="actor">Objeto que almacena el identificador de la pelicula y el del actor</param>
+        /// <returns>
+        /// Json indicando el resultado de la operacion
+        /// </returns>
+        [HttpDelete]
+        public ActionResult deleteActor(Actor_by_movie actor)
+        {
+            try
+            {
+                //Se abre la conexion entre C# y la base de datos
+                NpgsqlConnection connection = new NpgsqlConnection(Connection.connectionString);
+                connection.Open();
+
+                //Se declara el comando SQL a ejecutar
+                string sqlQuery = "DELETE FROM ACTOR_BY_MOVIE WHERE Id_actor = @Id_actor AND Id_movie = @Id_movie";
+
+                //Se crea el objeto a cargo de realizar la consulta
+                IDbCommand command = connection.CreateCommand();
+                command.CommandText = sqlQuery;
+
+                //Se declara el parametro correspondiente a Id_actor
+                var paramIdActor = command.CreateParameter();
+                paramIdActor.ParameterName = "Id_actor";
+                paramIdActor.Value = actor.Id_actor;
+                command.Parameters.Add(paramIdActor);
+
+                //Se declara el parametro correspondiente a Id_movie
+                var paramIdMovie = command.CreateParameter();
+                paramIdMovie.ParameterName = "Id_movie";
+                paramIdMovie.Value = actor.Id_movie;
+                command.Parameters.Add(paramIdMovie);
+
+                //Se ejecuta el comando, se almacena el resultado en una variable
+                int result = command.ExecuteNonQuery();
+
+                //Se cierra la conexion
+                connection.Close();
+
+                //Se retorna un Json indicando que la operacion fue exitosa
+                return Json(new { data = "success" }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e) //Caso en que ocurrio un error durante el proceso
+            {
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para obtener todos los directores de una pelicula
+        /// </summary>
+        /// <param name="id">Identificador de la pelicula</param>
+        /// <returns>
+        /// Json con la respuesta enviada por el servidor
+        /// </returns>
+        [HttpGet]
+        public ActionResult getDirectors(int id)
+        {
+            try
+            {
+                //Se abre la conexion entre C# y la base de datos
+                NpgsqlConnection connection = new NpgsqlConnection(Connection.connectionString);
+                connection.Open();
+
+                //Se declara la consulta SQL a ejecutar
+                string sqlQuery = "SELECT * FROM DIRECTOR_BY_MOVIE JOIN DIRECTOR ON DIRECTOR.Id_director = DIRECTOR_BY_MOVIE.Id_director WHERE Id_movie = " + id.ToString();
+
+                //Se ejecuta la consulta
+                NpgsqlDataAdapter sqlData = new NpgsqlDataAdapter(sqlQuery, connection);
+
+                //Se almacena la respuesta
+                DataSet dataSet = new DataSet();
+                sqlData.Fill(dataSet);
+
+                //Se cierra la conexion
+                connection.Close();
+
+                //Se crea una variable con los objetos recuperados
+                var data = dataSet.Tables[0].AsEnumerable().Select(x => new Director
+                {
+                    Id_director = x.Field<int>("Id_director"),
+                    F_name = x.Field<string>("F_name"),
+                    FL_name = x.Field<string>("FL_name"),
+                    SL_name = x.Field<string>("SL_name")
+                });
+
+                //Se transforma la informacion obtenida a formato Json
+                return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e)//Si ocurrio algun error se retorna un Json indicandolo
+            {
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para añadir un nuevo director a una pelicula
+        /// </summary>
+        /// <param name="director">Objeto que almacena el id del director y el de la pelicula</param>
+        /// <returns>
+        /// Json indicando el resultado de la operacion
+        /// </returns>
+        [HttpPost]
+        public ActionResult addDirector(Director_by_movie director)
+        {
+            try
+            {
+                //Se abre la conexion entre C# y la base de datos
+                NpgsqlConnection connection = new NpgsqlConnection(Connection.connectionString);
+                connection.Open();
+
+                //Se declara el comando SQL a ejecutar
+                string sqlQuery = "INSERT INTO DIRECTOR_BY_MOVIE (Id_director, Id_movie) VALUES (@Id_director, @Id_movie)";
+
+                //Se crea el objeto a cargo de realizar la consulta
+                IDbCommand command = connection.CreateCommand();
+                command.CommandText = sqlQuery;
+
+                //Se declara el parametro correspondiente a Id_director
+                var paramIdDirector = command.CreateParameter();
+                paramIdDirector.ParameterName = "Id_director";
+                paramIdDirector.Value = director.Id_director;
+                command.Parameters.Add(paramIdDirector);
+
+                //Se declara el parametro correspondiente a Id_movie
+                var paramIdMovie = command.CreateParameter();
+                paramIdMovie.ParameterName = "Id_movie";
+                paramIdMovie.Value = director.Id_movie;
+                command.Parameters.Add(paramIdMovie);
+
+                //Se ejecuta el comando, se almacena el resultado en una variable
+                int result = command.ExecuteNonQuery();
+
+                //Se cierra la conexion
+                connection.Close();
+
+                //Se retorna un Json indicando que la operacion fue exitosa
+                return Json(new { data = "success" }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e) //Caso en que ocurrio un error durante el proceso
+            {
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para eliminar un director de una pelicula
+        /// </summary>
+        /// <param name="actor">Objeto que almacena el identificador de la pelicula y el del director</param>
+        /// <returns>
+        /// Json indicando el resultado de la operacion
+        /// </returns>
+        [HttpDelete]
+        public ActionResult deleteDirector(Director_by_movie director)
+        {
+            try
+            {
+                //Se abre la conexion entre C# y la base de datos
+                NpgsqlConnection connection = new NpgsqlConnection(Connection.connectionString);
+                connection.Open();
+
+                //Se declara el comando SQL a ejecutar
+                string sqlQuery = "DELETE FROM DIRECTOR_BY_MOVIE WHERE Id_director = @Id_director AND Id_movie = @Id_movie";
+
+                //Se crea el objeto a cargo de realizar la consulta
+                IDbCommand command = connection.CreateCommand();
+                command.CommandText = sqlQuery;
+
+                //Se declara el parametro correspondiente a Id_director
+                var paramIdDirector = command.CreateParameter();
+                paramIdDirector.ParameterName = "Id_director";
+                paramIdDirector.Value = director.Id_director;
+                command.Parameters.Add(paramIdDirector);
+
+                //Se declara el parametro correspondiente a Id_movie
+                var paramIdMovie = command.CreateParameter();
+                paramIdMovie.ParameterName = "Id_movie";
+                paramIdMovie.Value = director.Id_movie;
+                command.Parameters.Add(paramIdMovie);
 
                 //Se ejecuta el comando, se almacena el resultado en una variable
                 int result = command.ExecuteNonQuery();

@@ -234,10 +234,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Actor.cs" />
+    <Compile Include="Models\Actor_by_movie.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\Bill_info.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\Director.cs" />
+    <Compile Include="Models\Director_by_movie.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\Rating.cs" />
