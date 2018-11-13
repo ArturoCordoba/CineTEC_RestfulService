@@ -40,7 +40,7 @@ namespace WebRole1.Controllers
             {
                 Id_screening = x.Field<int>("Id_screening"),
                 Price = x.Field<decimal>("Price"),
-                Schedule = x.Field<DateTime>("Schedule").ToString("dd-MM-yyyy HH:mm:ss"),
+                Schedule = x.Field<DateTime>("Schedule").ToString("yyyy-MM-dd HH:mm:ss"),
                 Id_room = x.Field<int>("Id_room"),
                 Id_movie = x.Field<int>("Id_movie")
             });
@@ -84,7 +84,7 @@ namespace WebRole1.Controllers
                 {
                     Id_screening = x.Field<int>("Id_screening"),
                     Price = x.Field<decimal>("Price"),
-                    Schedule = x.Field<DateTime>("Schedule").ToString("dd-MM-yyyy HH:mm:ss"),
+                    Schedule = x.Field<DateTime>("Schedule").ToString("yyyy-MM-dd HH:mm:ss"),
                     Id_room = x.Field<int>("Id_room"),
                     Id_movie = x.Field<int>("Id_movie")
                 });
@@ -321,7 +321,7 @@ namespace WebRole1.Controllers
                 var data = dataSet.Tables[0].AsEnumerable().Select(x => new Screenings_theater
                 {
                     Id_screening = x.Field<int>("Id_screening"),
-                    Schedule = x.Field<DateTime>("Schedule").ToString("dd-MM-yyyy HH:mm:ss"),
+                    Schedule = x.Field<DateTime>("Schedule").ToString("yyyy-MM-dd HH:mm:ss"),
                     Id_movie = x.Field<int>("Id_movie"),
                     M_name = x.Field<string>("M_name"),
                     Id_room = x.Field<int>("Id_room"),
