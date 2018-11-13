@@ -104,5 +104,53 @@ namespace WebRole1.Controllers
                 return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        /// <summary>
+        /// Metodo para obtener los asientos pertenecientes a una factura
+        /// </summary>
+        /// <param name="id">Identificador de la factura</param>
+        /// <returns>
+        /// Json con la respuesta enviada por la base de datos
+        /// </returns>
+        [HttpGet]
+        public ActionResult GetSeats(int id)
+        {
+            try
+            {
+                //Se abre la conexion entre C# y la base de datos
+                NpgsqlConnection connection = new NpgsqlConnection(Connection.connectionString);
+                connection.Open();
+
+                //Se declara la consulta SQL a ejecutar
+                string sqlQuery = "SELECT * FROM TICKETS_BILL WHERE Id_bill = " + id.ToString();
+
+                //Se ejecuta la consulta
+                NpgsqlDataAdapter sqlData = new NpgsqlDataAdapter(sqlQuery, connection);
+
+                //Se almacena la respuesta
+                DataSet dataSet = new DataSet();
+                sqlData.Fill(dataSet);
+
+                //Se cierra la conexion
+                connection.Close();
+
+                //Se crea una variable con los objetos recuperados
+                var data = dataSet.Tables[0].AsEnumerable().Select(x => new Tickets_bill
+                {
+                    Id_bill = x.Field<int>("Id_bill"),
+                    Id_ticket = x.Field<int>("Id_ticket"),
+                    Number_row = x.Field<string>("Number_row"),
+                    Number_column = x.Field<int>("Number_column"),
+                });
+
+                //Se transforma la informacion obtenida a formato Json
+                return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e)//Si ocurrio algun error se retorna un Json indicandolo
+            {
+                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }
