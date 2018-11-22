@@ -220,6 +220,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ActorController.cs" />
     <Compile Include="Controllers\BillController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\DirectorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Models\Actor_by_movie.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\Bill_info.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\Director.cs" />
     <Compile Include="Models\Director_by_movie.cs" />
@@ -313,6 +315,7 @@
     <Folder Include="Views\Actor\" />
     <Folder Include="Views\Bill\" />
     <Folder Include="Views\Clasificacion\" />
+    <Folder Include="Views\Client\" />
     <Folder Include="Views\Connection\" />
     <Folder Include="Views\Director\" />
     <Folder Include="Views\Movie\" />
