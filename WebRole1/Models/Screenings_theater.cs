@@ -15,6 +15,12 @@ namespace WebRole1.Models
 
         public string M_name { get; set; }
 
+        public string I_name { get; set; }
+
+        public decimal Duration { get; set; }
+
+        public string Rating { get; set; }
+
         public int Id_room { get; set; }
 
         public string R_name { get; set; }
