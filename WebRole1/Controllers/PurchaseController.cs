@@ -26,7 +26,7 @@ namespace WebRole1.Controllers
                     insert_tickets(purchase.Id_client, purchase.Id_screening, Id_bill, seat.Number_row, seat.Number_column);
                 }
 
-                return Json(new { data = "success" }, JsonRequestBehavior.AllowGet);
+                return Json(new { records = "success" }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception e) //Si ocurrio algun error se retorna un Json indicandolo

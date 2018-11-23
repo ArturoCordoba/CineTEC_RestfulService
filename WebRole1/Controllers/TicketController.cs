@@ -47,7 +47,7 @@ namespace WebRole1.Controllers
             });
 
             //Se transforma la informacion obtenida a formato Json
-            return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
+            return Json(new { records = data.ToList() }, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -92,7 +92,7 @@ namespace WebRole1.Controllers
                 });
 
                 //Se transforma la informacion obtenida a formato Json
-                return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
+                return Json(new { records = data.ToList() }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception e)//Si ocurrio algun error se retorna un Json indicandolo

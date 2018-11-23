@@ -46,7 +46,7 @@ namespace WebRole1.Controllers
             });
 
             //Se transforma la informacion obtenida a formato Json
-            return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
+            return Json(new { records = data.ToList() }, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -89,7 +89,7 @@ namespace WebRole1.Controllers
                 });
 
                 //Se transforma la informacion obtenida a formato Json
-                return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
+                return Json(new { records = data.ToList() }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception e)//Si ocurrio algun error se retorna un Json indicandolo
@@ -155,7 +155,7 @@ namespace WebRole1.Controllers
                 //Si la operacion fue exitosa
                 if (result > 0)
                 {
-                    return Json(new { data = "success" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { records = "success" }, JsonRequestBehavior.AllowGet);
                 }
                 //En caso de que ocurriera un error
                 else
@@ -232,7 +232,7 @@ namespace WebRole1.Controllers
                 //Si la operacion fue exitosa
                 if (result > 0)
                 {
-                    return Json(new { data = "success" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { records = "success" }, JsonRequestBehavior.AllowGet);
                 }
                 //En caso de que ocurriera un error
                 else
@@ -282,7 +282,7 @@ namespace WebRole1.Controllers
                 connection.Close();
 
                 //Se retorna un Json indicando que la operacion fue exitosa
-                return Json(new { data = "success" }, JsonRequestBehavior.AllowGet);
+                return Json(new { records = "success" }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception e) //Caso en que ocurrio un error durante el proceso
