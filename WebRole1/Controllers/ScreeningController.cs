@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Linq;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
 using WebRole1.Models;
 
@@ -334,7 +335,7 @@ namespace WebRole1.Controllers
                 });
 
                 //Se transforma la informacion obtenida a formato Json
-                return Json(new { data = data.ToList() }, JsonRequestBehavior.AllowGet);
+                return Json(new { records = data.ToList() }, JsonRequestBehavior.AllowGet);
             }
             catch(Exception e)
             {
