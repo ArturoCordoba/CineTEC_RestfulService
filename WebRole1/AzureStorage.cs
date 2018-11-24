@@ -10,6 +10,7 @@ namespace WebRole1
 {
     public class AzureStorage
     {
+        private string url = "https://cinetecrestservice.blob.core.windows.net/cinetec-images/";
         private static string accountName = "cinetecrestservice";
         private static string accessKey = "F6hbRO/6tBWwfSHkJi3HfBIjTr7Ki8+P8WAo1QQ/SkVEj/2vJeCOyJXNOwBRXSkbYSZ4BcleAvWwCR86KD0flA==";
 
@@ -20,7 +21,7 @@ namespace WebRole1
                 StorageCredentials credentials = new StorageCredentials(accountName, accessKey);
                 CloudStorageAccount storageAccount = new CloudStorageAccount(credentials, useHttps: true);
                 CloudBlobClient client = storageAccount.CreateCloudBlobClient();
-                CloudBlobContainer container = client.GetContainerReference("images");
+                CloudBlobContainer container = client.GetContainerReference("cinetec-images");
                 container.CreateIfNotExists();
                 container.SetPermissions(new BlobContainerPermissions
                 {
@@ -38,6 +39,6 @@ namespace WebRole1
 
             }
         }*/
-        
+
     }
 }

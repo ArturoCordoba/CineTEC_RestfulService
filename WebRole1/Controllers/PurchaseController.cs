@@ -22,6 +22,11 @@ namespace WebRole1.Controllers
             return resp;
         }
 
+        /// <summary>
+        /// Metodo para realizar una compra
+        /// </summary>
+        /// <param name="purchase"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Create(Purchase purchase)
         {
