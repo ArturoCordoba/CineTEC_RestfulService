@@ -17,7 +17,7 @@ namespace WebRole1.Models
 
         public int Number_copies { get; set; }
 
-        public int Duration { get; set; }
+        public decimal Duration { get; set; }
 
         public int Id_rating { get; set; }
     }

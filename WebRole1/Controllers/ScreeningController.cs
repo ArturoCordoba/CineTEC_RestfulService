@@ -2,6 +2,8 @@
 using System;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http.Cors;
 using System.Web.Mvc;
 using WebRole1.Models;
@@ -10,6 +12,16 @@ namespace WebRole1.Controllers
 {
     public class ScreeningController : Controller
     {
+        [AcceptVerbs("OPTIONS")]
+        public HttpResponseMessage Options()
+        {
+            var resp = new HttpResponseMessage(HttpStatusCode.OK);
+            resp.Headers.Add("Access-Control-Allow-Origin", "*");
+            resp.Headers.Add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+
+            return resp;
+        }
+
         /// <summary>
         /// Metodo para obtener todas las proyecciones de la base de datos
         /// </summary>

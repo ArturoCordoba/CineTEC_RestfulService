@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using WebRole1.Models;
@@ -11,6 +13,16 @@ namespace WebRole1.Controllers
 {
     public class ClientController : Controller
     {
+        [AcceptVerbs("OPTIONS")]
+        public HttpResponseMessage Options()
+        {
+            var resp = new HttpResponseMessage(HttpStatusCode.OK);
+            resp.Headers.Add("Access-Control-Allow-Origin", "*");
+            resp.Headers.Add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+
+            return resp;
+        }
+
         /// <summary>
         /// Metodo para obtener todos los clientes de la base de datos
         /// </summary>

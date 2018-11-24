@@ -5,11 +5,23 @@ using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using WebRole1.Models;
+using System.Net.Http;
+using System.Net;
 
 namespace WebRole1.Controllers
 {
     public class MovieController : Controller
     {
+        [AcceptVerbs("OPTIONS")]
+        public HttpResponseMessage Options()
+        {
+            var resp = new HttpResponseMessage(HttpStatusCode.OK);
+            resp.Headers.Add("Access-Control-Allow-Origin", "*");
+            resp.Headers.Add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+
+            return resp;
+        }
+
         /// <summary>
         /// Metodo para obtener todas las peliculas
         /// </summary>
@@ -44,7 +56,7 @@ namespace WebRole1.Controllers
                 M_name = x.Field<string>("M_name"),
                 I_name = x.Field<string>("I_name"),
                 Number_copies = x.Field<int>("Number_copies"),
-                Duration = x.Field<int>("Duration"),
+                Duration = x.Field<decimal>("Duration"),
                 Id_rating = x.Field<int>("Id_rating")
             });
 

@@ -2,6 +2,8 @@
 using System;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Mvc;
 using WebRole1.Models;
 
@@ -9,6 +11,16 @@ namespace WebRole1.Controllers
 {
     public class theaterController : Controller
     {
+        [AcceptVerbs("OPTIONS")]
+        public HttpResponseMessage Options()
+        {
+            var resp = new HttpResponseMessage(HttpStatusCode.OK);
+            resp.Headers.Add("Access-Control-Allow-Origin", "*");
+            resp.Headers.Add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+
+            return resp;
+        }
+
         /// <summary>
         /// Metodo para obtener toda la lista de cines
         /// </summary>
@@ -217,17 +229,17 @@ namespace WebRole1.Controllers
                 //Si la operacion fue exitosa
                 if (result > 0)
                 {
-                    return Json(new { records = "success" }, JsonRequestBehavior.AllowGet);
+                    return new HttpStatusCodeResult(HttpStatusCode.OK);  // OK = 200
                 }
                 //En caso de que ocurriera un error
                 else
                 {
-                    return Json(new { error = "error" }, JsonRequestBehavior.AllowGet);
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);  
                 }
             }
             catch (Exception e)
             {
-                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
 
@@ -267,12 +279,12 @@ namespace WebRole1.Controllers
                 connection.Close();
 
                 //Se retorna un Json indicando que la operacion fue exitosa
-                return Json(new { records = "success" }, JsonRequestBehavior.AllowGet);
+                return new HttpStatusCodeResult(HttpStatusCode.OK);  // OK = 200
 
             }
             catch (Exception e) //Caso en que ocurrio un error durante el proceso
             {
-                return Json(new { error = e.ToString() }, JsonRequestBehavior.AllowGet);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
 
